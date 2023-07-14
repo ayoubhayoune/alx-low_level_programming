@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 /**
  * main - Entry point
  *
@@ -10,33 +9,23 @@
  */
 int main(void)
 {
-	int num1Tens, num1Ones, num2Tens, num2Ones;
+	int firstDigit;
+	int secondDigit;
 
-	for (num1Tens = 0; num1Tens <= 9; num1Tens++)
+	for (firstDigit = 0; firstDigit <= 99; firstDigit++)
 	{
-		for (num1Ones = 0; num1Ones <= 9; num1Ones++)
+		for (secondDigit = firstDigit + 1; secondDigit <= 99; secondDigit++)
 		{
-			for (num2Tens = 0; num2Tens <= 9; num2Tens++)
-			{
-				for (num2Ones = 0; num2Ones <= 9; num2Ones++)
-				{
-					if ((num1Tens < num2Tens) ||
-					   (num1Tens == num2Tens && num1Ones < num2Ones))
-					{
-						putchar(num1Tens + '0');
-						putchar(num1Ones + '0');
-						putchar(' ');
-						putchar(num2Tens + '0');
-						putchar(num2Ones + '0');
+			putchar((firstDigit / 10) + '0');
+			putchar((firstDigit % 10) + '0');
+			putchar(' ');
+			putchar((secondDigit / 10) + '0');
+			putchar((secondDigit % 10) + '0');
 
-						if (!(num1Tens == 9 && num1Ones == 8 &&
-						     num2Tens == 9 && num2Ones == 9))
-						{
-							putchar(',');
-							putchar(' ');
-						}
-					}
-				}
+			if (!(firstDigit == 98 && secondDigit == 99))
+			{
+				putchar(',');
+				putchar(' ');
 			}
 		}
 	}
@@ -45,3 +34,4 @@ int main(void)
 
 	return (0);
 }
+
