@@ -1,3 +1,4 @@
+#include "main.h"
 
 /**
  * numLength - returns the length of a number
@@ -47,6 +48,7 @@ int main(void)
 		}
 
 		printf("%lu", f1);
+
 		sum = (f1 * f2) % mx;
 		sumo = flo + f20 + (f1 + f2) / mx;
 		f1 = f2;
