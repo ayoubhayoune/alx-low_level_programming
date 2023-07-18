@@ -7,26 +7,20 @@
  */
 int main(void)
 {
-	unsigned long int a = 1, b = 2, next, sum = 0;
+	unsigned int a = 1, b = 2, next;
 	int count;
 
-	printf("%lu, %lu", a, b);
+	printf("%u, %u", a, b);
 
 	for (count = 3; count <= 98; count++)
 	{
 		next = a + b;
-		if (next > 4000000)
-			break;
-
-		if (next % 2 == 0)
-			sum += next;
-
-		printf(", %lu", next);
+		printf(", %u", next);
 		a = b;
 		b = next;
 	}
 
-	printf("\nSum of even-valued terms: %lu\n", sum);
+	printf("\n");
 
 	return (0);
 }
