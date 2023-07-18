@@ -1,4 +1,3 @@
-#include "main.h"
 
 /**
  * numLength - returns the length of a number
@@ -40,17 +39,20 @@ int main(void)
 		if (flo > 0)
 			printf("%lu", flo);
 
-		initial0s = numLength(mx) - numLength(f1);
-		while (f20 < initial0s)
+		initial0s = numLength(mx) - 1 - numLength(f1);
+		while (flo > 0 && initial0s > 0)
 		{
-			printf("0");
+			printf("%d", 0);
 			initial0s--;
 		}
 
 		printf("%lu", f1);
-		sum = f1 + f2;
+		sum = (f1 * f2) % mx;
+		sumo = flo + f20 + (f1 + f2) / mx;
 		f1 = f2;
+		flo = f20;
 		f2 = sum;
+		f20 = sumo;
 
 		if (count != 98)
 			printf(", ");
