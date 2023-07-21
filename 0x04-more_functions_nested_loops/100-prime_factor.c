@@ -1,45 +1,64 @@
-#include <stdio.h>
-#include <math.h>
 
 /**
- * largest_prime_factor - Finds the largest prime factor of a number.
- * @n: The number to find the largest prime factor for.
+ * _sqrt - finds the square root
  *
- * Return: The largest prime factor of the number @n.
-*/
-long largest_prime_factor(long n)
+ * @x: input number
+ *
+ * Return: square root of x
+ */
+double _sqrt(double x)
 {
-	long largest = 2;
+	/* Function implementation */
+	float sqrt, tmp;
 
-	while (n % 2 == 0)
+	sqrt = x / 2;
+	tmp = 0;
+
+	while (sqrt != tmp)
 	{
-		n /= 2;
+		tmp = sqrt;
+		sqrt = (x / tmp + tmp) / 2;
 	}
+	return (sqrt);
+}
 
-	for (long i = 3; i <= sqrt(n); i += 2)
+/**
+ * largest_prime_factor - finds and prints the largest
+ *                        prime factor of number (num)
+ *
+ * @num: number to find
+ */
+void largest_prime_factor(long int num)
+{
+	/* Function implementation */
+	int prmNu, largest;
+
+	/* first divide with the smallest prime number (two) */
+	while (num % 2 == 0)
+		num = num / 2;
+	/* num must be odd so we proceed to the next prime number (plus two) */
+	for (prmNu = 3; prmNu <= _sqrt(num); prmNu += 2)
 	{
-		while (n % i == 0)
+		while (num % prmNu == 0)
 		{
-			largest = i;
-			n /= i;
+			num = num / prmNu;
+			largest = prmNu;
 		}
 	}
 
-	if (n > 2)
-		largest = n;
-
-	return (largest);
+	if (num > 2)
+		largest = num;
+	printf("%d\n", largest);
 }
+
 /**
  * main - Entry point of the program.
  *
  * Return: Always 0.
-*/
+ */
 int main(void)
 {
-	long number = 612852475143;
-	long result = largest_prime_factor(number);
-
-	printf("%ld\n", result);
+	/* Function implementation */
+	largest_prime_factor(612852475143);
 	return (0);
 }
