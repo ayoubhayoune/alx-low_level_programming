@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include "main.h"
 
 /**
  * _sqrt - finds the square root
