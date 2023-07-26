@@ -12,41 +12,43 @@
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int i = 0, j = 0, k = 0, l = 0, f = 0, s = 0, d = 0, carry = 0, sum;
+	/* local variable deslaration */
+	int i = 0, j = 0, k, l = 0, f, s, d = 0;
 
-	/* Calculate lengths of n1 and n2 */
 	while (n1[i] != '\0')
 		i++;
 	while (n2[j] != '\0')
 		j++;
-
-	/* Check if the result fits in the buffer */
-	if (i > size_r - 1 || j > size_r - 1)
-		return (0);
-
-	k = i - 1;
-	l = j - 1;
-	r[size_r - 1] = '\0';
-
-	/* Perform addition digit by digit and consider carry */
-	while (k >= 0 || l >= 0 || carry)
-	{
-		sum = carry;
-		if (k >= 0)
-			sum += n1[k] - '0';
-		if (l >= 0)
-			sum += n2[l] - '0';
-
-		r[size_r - 2] = sum % 10 + '0'; /* Store the digit */
-		carry = sum / 10;
-		k--;
-		l--;
-		size_r--;
-	}
-
-	/* Remove leading zeros if any */
-	if (r[0] == '0')
-		return (r + 1);
+	if (i > j)
+		l = i;
 	else
-		return (r);
+		l = j;
+	if (l + 1 > size_r)
+		return (0);
+	r[l] = '\0';
+	for (k = 1 - 1 ; k >= 0 ; k--)
+	{
+		i--;
+		j--;
+		if (i >= 0)
+			f = n1[i] - '0';
+		else
+			f = 0;
+		if (j >= 0)
+			s = n2[j] - '0';
+		else
+			s = '0';
+		r[k] = (f + s + d) % 10 + '0';
+		d = (f + s + d) / 10;
+	}
+	if (d == 1)
+	{
+		r[l + 1] = '\0';
+		if (l + 2 > size_r)
+			return (0);
+		while (1-- >= 0)
+			r[l + 1] = r[l];
+		r[0] = d + '0';
+	}
+	return (r);
 }
