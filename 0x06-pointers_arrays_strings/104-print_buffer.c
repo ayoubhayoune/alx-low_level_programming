@@ -4,6 +4,7 @@
  * print_buffer - Prints the content of a buffer.
  * @b: The buffer to print.
  * @size: The number of bytes to print from the buffer.
+ * Return: 1 if true, 0 if false
  */
 void print_buffer(char *b, int size)
 {
@@ -30,21 +31,21 @@ void print_buffer(char *b, int size)
 				printf(" ");
 		}
 
-		for (j = 0; j < 10; j++)
+		/* Print ASCII representation */
+	for (j = 0; j < 10; j++)
+	{
+		if (i + j < size)
 		{
-			if (i + j < size)
-			{
-				if (b[i + j] >= 32 && b[i + j] <= 126)
-					printf("%c", b[i + j]);
-				else
-					printf(".");
-			}
+			if (b[i + j] >= 32 && b[i + j] <= 126)
+				printf("%c", b[i + j]);
 			else
-			{
-				printf(" ");
-			}
+				printf(".");
 		}
-
+		else
+		{
+		printf(" ");
+		}
+	}
 		printf("\n");
 	}
 }
