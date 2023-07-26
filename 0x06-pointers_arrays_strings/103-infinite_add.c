@@ -12,36 +12,39 @@
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int len1 = 0, len2 = 0, carry = 0, sum;
-	int i, j;
+	int i = 0, j = 0, k = 0, l = 0, f = 0, s = 0, d = 0, carry = 0, sum;
 
-	while (n1[len1] != '\0')
-		len1++;
-	while (n2[len2] != '\0')
-		len2++;
+	/* Calculate lengths of n1 and n2 */
+	while (n1[i] != '\0')
+		i++;
+	while (n2[j] != '\0')
+		j++;
 
-	if (len1 > size_r - 1 || len2 > size_r - 1)
+	/* Check if the result fits in the buffer */
+	if (i > size_r - 1 || j > size_r - 1)
 		return (0);
 
-	i = len1 - 1;
-	j = len2 - 1;
+	k = i - 1;
+	l = j - 1;
 	r[size_r - 1] = '\0';
 
-	while (i >= 0 || j >= 0 || carry)
+	/* Perform addition digit by digit and consider carry */
+	while (k >= 0 || l >= 0 || carry)
 	{
 		sum = carry;
-		if (i >= 0)
-			sum += n1[i] - '0';
-		if (j >= 0)
-			sum += n2[j] - '0';
+		if (k >= 0)
+			sum += n1[k] - '0';
+		if (l >= 0)
+			sum += n2[l] - '0';
 
-		r[size_r - 2] = sum % 10 + '0';
+		r[size_r - 2] = sum % 10 + '0'; /* Store the digit */
 		carry = sum / 10;
-		i--;
-		j--;
+		k--;
+		l--;
 		size_r--;
 	}
 
+	/* Remove leading zeros if any */
 	if (r[0] == '0')
 		return (r + 1);
 	else
