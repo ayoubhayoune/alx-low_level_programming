@@ -21,7 +21,7 @@ int _strlen(char *s)
 }
 
 /**
- * is_palindrome_helper - Recursive function check if string is palindrome.
+ * is_palindrome_helper - Recursive function to check if string palindrome.
  *
  * @s: The string to check.
  * @start: The starting index.
