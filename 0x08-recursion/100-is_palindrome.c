@@ -21,15 +21,16 @@ int _strlen(char *s)
 }
 
 /**
- * is_palindrome_helper - Recursive function to check if string palindrome.
+ * check - Recursive function to check if a string is a palindrome.
  *
  * @s: The string to check.
  * @start: The starting index.
  * @end: The ending index.
+ * @mod: The length modulo 2.
  *
  * Return: 1 if the string is a palindrome, 0 otherwise.
  */
-int is_palindrome_helper(char *s, int start, int end)
+int check(char *s, int start, int end, int mod)
 {
 	if (start >= end)
 		return (1);
@@ -37,7 +38,23 @@ int is_palindrome_helper(char *s, int start, int end)
 	if (s[start] != s[end])
 		return (0);
 
-	return (is_palindrome_helper(s, start + 1, end - 1));
+	return (check(s, start + 1, end - 1, mod));
+}
+
+/**
+ * last_index - Finds the last index of a string.
+ *
+ * @s: The string to find the last index of.
+ *
+ * Return: The last index of the string.
+ */
+int last_index(char *s)
+{
+	int n = 0;
+
+	if (*s > '\0')
+		n += last_index(s + 1) + 1;
+	return (n);
 }
 
 /**
@@ -49,12 +66,6 @@ int is_palindrome_helper(char *s, int start, int end)
  */
 int is_palindrome(char *s)
 {
-	int len;
-
-	len = _strlen(s);
-
-	if (len <= 1)
-		return (1);
-
-	return (is_palindrome_helper(s, 0, len - 1));
+int end = last_index(s);
+return (check(s, 0, end - 1, end % 2));
 }
