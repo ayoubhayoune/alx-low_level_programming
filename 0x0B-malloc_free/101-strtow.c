@@ -32,31 +32,30 @@ int word_count(char *str)
  * allocate_words - Allocates memory for an array of words.
  * @words: The array to be allocated
  * @wc: The number of words
+ * @str: The input string
  *
  * Return: 1 on success, 0 on failure
  */
-int allocate_words(char **words, int wc)
+int allocate_words(char **words, int wc, char *str)
 {
-	int i;
+	int i, j, k = 0;
 
 	for (i = 0; i < wc; i++)
 	{
-	while (*words[i] == ' ')
-		words[i]++;
+		while (str[k] == ' ')
+			k++;
 
-	int word_len = 0;
+		int word_len = 0;
 
-	while (words[i][word_len] != ' ' && words[i][word_len] != '\0')
-		word_len++;
+		while (str[k + word_len] != ' ' && str[k + word_len] != '\0')
+			word_len++;
 
-	words[i] = malloc((word_len + 1) * sizeof(char));
-	if (words[i] == NULL)
-		return (0);
+		words[i] = malloc((word_len + 1) * sizeof(char));
+		if (words[i] == NULL)
+			return (0);
 
-		int j;
-
-		for (j = 0; j < word_len; j++)
-		words[i][j] = str[k++];
+		for (j = 0; j < word_len; j++, k++)
+			words[i][j] = str[k];
 
 		words[i][j] = '\0';
 	}
@@ -87,7 +86,7 @@ char **strtow(char *str)
 	if (words == NULL)
 		return (NULL);
 
-	if (!allocate_words(words, wc))
+	if (!allocate_words(words, wc, str))
 	{
 		for (i = 0; i < wc; i++)
 			free(words[i]);
