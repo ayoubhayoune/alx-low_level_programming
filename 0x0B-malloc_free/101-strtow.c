@@ -38,26 +38,28 @@ int word_count(char *str)
  */
 int allocate_words(char **words, int wc, char *str)
 {
-	int i, j, k = 0;
+	int i, j;
 
 	for (i = 0; i < wc; i++)
 	{
-		while (str[k] == ' ')
-			k++;
+		while (*str == ' ')
+			str++;
 
 		int word_len = 0;
 
-		while (str[k + word_len] != ' ' && str[k + word_len] != '\0')
+		while (str[word_len] != ' ' && str[word_len] != '\0')
 			word_len++;
 
 		words[i] = malloc((word_len + 1) * sizeof(char));
 		if (words[i] == NULL)
 			return (0);
 
-		for (j = 0; j < word_len; j++, k++)
-			words[i][j] = str[k];
+		for (j = 0; j < word_len; j++)
+			words[i][j] = str[j];
 
 		words[i][j] = '\0';
+
+		str += word_len;
 	}
 
 	return (1);
@@ -72,7 +74,7 @@ int allocate_words(char **words, int wc, char *str)
 char **strtow(char *str)
 {
 	char **words;
-	int wc, i, k = 0;
+	int wc, i;
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
