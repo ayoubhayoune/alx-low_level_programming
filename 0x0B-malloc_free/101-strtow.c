@@ -39,14 +39,14 @@ int word_count(char *str)
 int allocate_words(char **words, int wc, char *str)
 {
 	int i, j;
+	int word_len;
 
 	for (i = 0; i < wc; i++)
 	{
 		while (*str == ' ')
 			str++;
 
-		int word_len = 0;
-
+		word_len = 0;
 		while (str[word_len] != ' ' && str[word_len] != '\0')
 			word_len++;
 
