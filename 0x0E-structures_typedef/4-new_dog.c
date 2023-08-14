@@ -13,7 +13,7 @@ int _strlen(const char *str)
 {
 	int length = 0;
 
-	while ($str++)
+	while (*str++)
 		length++;
 	return (length);
 }
@@ -52,6 +52,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *dog;
 
+	/* if name and owner are empty and age is less that zero return null*/
 	if (!name || age < 0 || !owner)
 		return (NULL);
 
