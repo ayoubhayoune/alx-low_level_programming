@@ -1,6 +1,46 @@
 #include "dog.h"
 
 /**
+ * _strlen - Computes the length of a string.
+ * @str: Input string.
+ *
+ * Return: Length of the string.
+ */
+int _strlen(const char *str)
+{
+        int length = 0;
+
+        while (str[length] != '\0')
+                length++;
+
+        return (length);
+}
+
+/**
+ * _strcopy - Copies a string from source to destination.
+ * @dest: Destination string.
+ * @src: Source string.
+ *
+ * Return: Pointer to the destination string.
+ */
+char *_strcopy(char *dest, char *src)
+{
+        int i;
+        int length = _strlen(src);
+
+        dest = malloc(length + 1);
+        if (dest == NULL)
+                return (NULL);
+
+        for (i = 0; i < length; i++)
+                dest[i] = src[i];
+
+        dest[length] = '\0';
+
+        return (dest);
+}
+
+/**
  * new_dog - Creates a new dog and initializes its attributes.
  * @name: Name of the dog.
  * @age: Age of the dog.
@@ -37,44 +77,4 @@ dog_t *new_dog(char *name, float age, char *owner)
 	new_dog->owner = owner_copy;
 
 	return (new_dog);
-}
-
-/**
- * _strcopy - Copies a string from source to destination.
- * @dest: Destination string.
- * @src: Source string.
- *
- * Return: Pointer to the destination string.
- */
-char *_strcopy(char *dest, char *src)
-{
-	int i;
-	int length = _strlen(src);
-
-	dest = malloc(length + 1);
-	if (dest == NULL)
-		return (NULL);
-
-	for (i = 0; i < length; i++)
-		dest[i] = src[i];
-
-	dest[length] = '\0';
-
-	return (dest);
-}
-
-/**
- * _strlen - Computes the length of a string.
- * @str: Input string.
- *
- * Return: Length of the string.
- */
-int _strlen(const char *str)
-{
-	int length = 0;
-
-	while (str[length] != '\0')
-		length++;
-
-	return (length);
 }
