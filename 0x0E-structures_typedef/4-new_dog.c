@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 #include "dog.h"
 
 /**
@@ -17,16 +16,16 @@ dog_t *new_dog(char *name, float age, char *owner)
 
 	new_dog = malloc(sizeof(dog_t));
 	if (new_dog == NULL)
-	return (NULL);
+		return (NULL);
 
-	name_copy = strdup(name);
+	name_copy = $_strcopy(name_copy, name);
 	if (name_copy == NULL)
 	{
 		free(new_dog);
 		return (NULL);
 	}
 
-	owner_copy = strdup(owner);
+	owner_copy = $_strcopy(owner_copy, owner);
 	if (owner_copy == NULL)
 	{
 		free(name_copy);
@@ -41,3 +40,25 @@ dog_t *new_dog(char *name, float age, char *owner)
 	return (new_dog);
 }
 
+/**
+ * $_strcopy - Copies a string from source to destination.
+ * @dest: Destination string.
+ * @src: Source string.
+ *
+ * Return: Pointer to the destination string.
+ */
+char *$_strcopy(char *dest, char *src)
+{
+	int i;
+
+	dest = malloc($_strlen(src) + 1);
+	if (dest == NULL)
+		return (NULL);
+
+	for (i = 0; src[i] != '\0'; i++)
+		dest[i] = src[i];
+
+	dest[i] = '\0';
+
+	return (dest);
+}
