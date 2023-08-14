@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "dog.h"
 
 /**
@@ -18,14 +17,14 @@ dog_t *new_dog(char *name, float age, char *owner)
 	if (new_dog == NULL)
 		return (NULL);
 
-	name_copy = $_strcopy(name_copy, name);
+	name_copy = _strcopy(name_copy, name);
 	if (name_copy == NULL)
 	{
 		free(new_dog);
 		return (NULL);
 	}
 
-	owner_copy = $_strcopy(owner_copy, owner);
+	owner_copy = _strcopy(owner_copy, owner);
 	if (owner_copy == NULL)
 	{
 		free(name_copy);
@@ -41,24 +40,41 @@ dog_t *new_dog(char *name, float age, char *owner)
 }
 
 /**
- * $_strcopy - Copies a string from source to destination.
+ * _strcopy - Copies a string from source to destination.
  * @dest: Destination string.
  * @src: Source string.
  *
  * Return: Pointer to the destination string.
  */
-char *$_strcopy(char *dest, char *src)
+char *_strcopy(char *dest, char *src)
 {
 	int i;
+	int length = _strlen(src);
 
-	dest = malloc($_strlen(src) + 1);
+	dest = malloc(length + 1);
 	if (dest == NULL)
 		return (NULL);
 
-	for (i = 0; src[i] != '\0'; i++)
+	for (i = 0; i < length; i++)
 		dest[i] = src[i];
 
-	dest[i] = '\0';
+	dest[length] = '\0';
 
 	return (dest);
+}
+
+/**
+ * _strlen - Computes the length of a string.
+ * @str: Input string.
+ *
+ * Return: Length of the string.
+ */
+int _strlen(const char *str)
+{
+	int length = 0;
+
+	while (str[length] != '\0')
+		length++;
+
+	return (length);
 }
