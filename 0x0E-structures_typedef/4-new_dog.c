@@ -8,12 +8,12 @@
  */
 int _strlen(const char *str)
 {
-        int length = 0;
+	int length = 0;
 
-        while (str[length] != '\0')
-                length++;
+	while (str[length] != '\0')
+		length++;
 
-        return (length);
+	return (length);
 }
 
 /**
@@ -25,19 +25,19 @@ int _strlen(const char *str)
  */
 char *_strcopy(char *dest, char *src)
 {
-        int i;
-        int length = _strlen(src);
+	int i;
+	int length = _strlen(src);
 
-        dest = malloc(length + 1);
-        if (dest == NULL)
-                return (NULL);
+	dest = malloc(length + 1);
+	if (dest == NULL)
+		return (NULL);
 
-        for (i = 0; i < length; i++)
-                dest[i] = src[i];
+	for (i = 0; i < length; i++)
+		dest[i] = src[i];
 
-        dest[length] = '\0';
+	dest[length] = '\0';
 
-        return (dest);
+	return (dest);
 }
 
 /**
