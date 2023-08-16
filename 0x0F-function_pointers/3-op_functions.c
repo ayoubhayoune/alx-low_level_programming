@@ -49,7 +49,7 @@ int op_div(int a, int b)
 }
 
 /**
- * op_mod - Computes the modulo of two integers.
+ * op_mod - modulo two integers
  * @a: The first int
  * @b: The second int
  *
