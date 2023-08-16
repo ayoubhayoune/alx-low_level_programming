@@ -2,10 +2,10 @@
 
 /**
  * op_add - Adds two integers.
- * @a: The first integer.
- * @b: The second integer.
+ * @a: The first int
+ * @b: The second int
  *
- * Return: The sum of the two integers.
+ * Return: The sum 
  */
 int op_add(int a, int b)
 {
@@ -14,10 +14,10 @@ int op_add(int a, int b)
 
 /**
  * op_sub - Subtracts two integers.
- * @a: The first integer.
- * @b: The second integer.
+ * @a: The first int
+ * @b: The second int
  *
- * Return: The difference between the two integers.
+ * Return: The difference 
  */
 int op_sub(int a, int b)
 {
@@ -26,10 +26,10 @@ int op_sub(int a, int b)
 
 /**
  * op_mul - Multiplies two integers.
- * @a: The first integer.
- * @b: The second integer.
+ * @a: The first int
+ * @b: The second int
  *
- * Return: The product of the two integers.
+ * Return: The product
  */
 int op_mul(int a, int b)
 {
@@ -38,10 +38,10 @@ int op_mul(int a, int b)
 
 /**
  * op_div - Divides two integers.
- * @a: The first integer.
- * @b: The second integer (non-zero).
+ * @a: The first int.
+ * @b: The second int
  *
- * Return: The result of integer division of a by b.
+ * Return: The quotient
  */
 int op_div(int a, int b)
 {
@@ -50,10 +50,10 @@ int op_div(int a, int b)
 
 /**
  * op_mod - Computes the modulo of two integers.
- * @a: The first integer.
- * @b: The second integer (non-zero).
+ * @a: The first int
+ * @b: The second int
  *
- * Return: The remainder of the division of a by b.
+ * Return: The remainder 
  */
 int op_mod(int a, int b)
 {
