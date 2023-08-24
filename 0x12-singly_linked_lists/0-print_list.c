@@ -2,15 +2,15 @@
 
 /**
  * _strlen - Calculates the length of a string.
- * @str: The input string.
+ * @s: The input string.
  *
  * Return: The length of the string.
  */
-int _strlen(char *str)
+int _strlen(char *s)
 {
 	unsigned int i = 0;
 
-	while (str[i])
+	while (s[i])
 		i++;
 
 	return (i);
@@ -26,7 +26,7 @@ size_t print_list(const list_t *h)
 {
 	size_t count = 0;
 
-	while (h != NULL)
+	while (h)
 	{
 		printf("[%u] %s\n", _strlen(h->str), h->str ? h->str : "(nil)");
 			h = h->next;
