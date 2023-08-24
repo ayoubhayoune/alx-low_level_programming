@@ -1,24 +1,6 @@
 #include "lists.h"
 
 /**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
- *
- * Return: integer length of string
- */
-int _strlen(char *s)
-{
-	int i = 0;
-
-	if (!s)
-		return (0);
-	while (*s++)
-		i++;
-	return (i);
-}
-
-/**
- * add_node - Adds a new node at the beginning of a list_t list.
  * @head: A pointer to a pointer to the head of the list.
  * @str: The string to be duplicated and stored in the new node.
  *
