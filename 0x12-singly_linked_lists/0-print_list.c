@@ -8,12 +8,12 @@
  */
 int _strlen(char *str)
 {
-	unsigned int len = 0;
+	unsigned int i = 0;
 
-	while (str[len])
-		len++;
+	while (str[i])
+		i++;
 
-	return (len);
+	return (i);
 }
 
 /**
