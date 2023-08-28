@@ -1,66 +1,64 @@
 #include "lists.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
- * _realloc_list - Reallocates memory for an array of pointers to nodes.
- * @old_list: Pointer to the old list.
+ * _r - Reallocates memory for an array of pointers to nodes.
+ * @list: Pointer to the old list.
  * @size: Size of the new list.
- * @new_node: Pointer to the new node to add.
+ * @new: Pointer to the new node to add.
  *
  * Return: Pointer to the new list.
  */
-const listint_t **_realloc_list(const listint_t **old_list,
-					size_t size, const listint_t *new_node)
+const listint_t **_r(const listint_t **list, size_t size, const listint_t *new)
 {
-	const listint_t **new_list;
+	listint_t **newlist;
 	size_t i;
 
-	new_list = malloc(size * sizeof(listint_t *));
-	if (new_list == NULL)
+	newlist = malloc(size * sizeof(listint_t *));
+	if (newlist == NULL)
 	{
-		free(old_list);
+		free(list);
 		exit(98);
 	}
 
 	for (i = 0; i < size - 1; i++)
-		new_list[i] = old_list[i];
+		newlist[i] = list[i];
 
-	new_list[i] = new_node;
-	free(old_list);
+	newlist[i] = new;
+	free(list);
 
-	return (new_list);
+	return (newlist);
 }
 
 /**
- * print_listint_safe - Prints a listint_t linked list safely.
- * @head: Pointer to the start of the list.
+ * print_listint_safe - prints a listint_t linked list.
+ * @head: pointer to the start of the list
  *
- * Return: The number of nodes in the list.
+ * Return: the number of nodes in the list
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t num = 0;
-	const listint_t **node_list = NULL;
+	size_t i, num = 0;
+	const listint_t **list = NULL;
 
 	while (head != NULL)
 	{
-		for (size_t i = 0; i < num; i++)
+		for (i = 0; i < num; i++)
 		{
-			if (head == node_list[i])
+			if (head == list[i])
 			{
 				printf("-> [%p] %d\n", (void *)head, head->n);
-				free(node_list);
+				free(list);
 				return (num);
 			}
 		}
-
 		num++;
-		node_list = _realloc_list(node_list, num, head);
+		list = _r(list, num, head);
 		printf("[%p] %d\n", (void *)head, head->n);
 		head = head->next;
 	}
-
-	free(node_list);
+	free(list);
 	return (num);
 }
+
