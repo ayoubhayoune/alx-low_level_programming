@@ -7,65 +7,58 @@
 #define PERMISSIONS (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH)
 
 /**
- * copy_file_content - Copies content from source to destination file
- * @from_fd: Source file descriptor
- * @to_fd: Destination file descriptor
- * Return: 1 on success, 0 on failure
+ * exit_with_error - Print an error message and exit with the given status
+ * @message: The error message
+ * @status: The exit status
  */
-int copy_file_content(int from_fd, int to_fd)
+void exit_with_error(const char *message, int status)
 {
-	ssize_t bytes_read;
-	char buffer[READ_BUF_SIZE];
-
-	while ((bytes_read = read(from_fd, buffer, READ_BUF_SIZE)) > 0)
-	{
-		if (write(to_fd, buffer, bytes_read) != bytes_read)
-			return (0);
-	}
-
-	return (bytes_read == 0);
+	dprintf(STDERR_FILENO, message);
+	exit(status);
 }
 
 /**
- * main - Copies the content of one file to another file
- * @argc: The number of arguments
- * @argv: The argument vector
+ * main - Program entry point
+ * @argc: Argument count
+ * @argv: Argument vector
  * Return: 0 on success, exit codes 97-100 on failure
  */
 int main(int argc, char *argv[])
 {
-	int from_fd, to_fd;
+	int from_fd = 0, to_fd = 0;
+	ssize_t bytes_read;
+	char buffer[READ_BUF_SIZE];
 
 	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, USAGE);
-		return (EXIT_FAILURE);
-	}
-
+		exit_with_error(USAGE, 97);
 	from_fd = open(argv[1], O_RDONLY);
 	if (from_fd == -1)
-	{
-		dprintf(STDERR_FILENO, ERR_NOREAD, argv[1]);
-		return (EXIT_FAILURE);
-	}
-
+		exit_with_error(ERR_NOREAD, 98);
 	to_fd = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, PERMISSIONS);
 	if (to_fd == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]);
 		close(from_fd);
-		return (EXIT_FAILURE);
+		exit_with_error(ERR_NOWRITE, 99);
 	}
 
-	if (!copy_file_content(from_fd, to_fd))
+	while ((bytes_read = read(from_fd, buffer, READ_BUF_SIZE)) > 0)
 	{
-		dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]);
+		if (write(to_fd, buffer, bytes_read) != bytes_read)
+		{
+			close(from_fd);
+			close(to_fd);
+			exit_with_error(ERR_NOWRITE, 99);
+		}
+	}
+	if (bytes_read == -1)
+	{
 		close(from_fd);
 		close(to_fd);
-		return (EXIT_FAILURE);
+		exit_with_error(ERR_NOREAD, 98);
 	}
 
 	close(from_fd);
 	close(to_fd);
+
 	return (EXIT_SUCCESS);
 }
